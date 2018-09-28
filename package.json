@@ -1,0 +1,25 @@
+{
+  "name": "react-native-voice-recorder",
+  "version": "0.0.0",
+  "description": "React Native: Native Voice Recorder",
+  "main": "RNVoiceRecorder.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prscX/react-native-voice-recorder.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "node ../pod-installer/index.js"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": "Pranav Raj Singh Chauhan",
+  "dependencies": {
+    "pod-installer": "0.0.0"
+  },
+  "devDependencies": {
+    "prettier-pack": "0.0.7"
+  },
+  "license": "Apache License 2.0"
+}
