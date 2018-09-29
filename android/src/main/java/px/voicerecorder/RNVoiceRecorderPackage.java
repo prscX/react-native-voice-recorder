@@ -1,5 +1,5 @@
 
-package com.reactlibrary;
+package px.voicerecorder;
 
 import java.util.Arrays;
 import java.util.Collections;
