@@ -8,13 +8,19 @@ class VoiceRecorder extends PureComponent {
   static propTypes = {
     ...ViewPropTypes,
 
+    format: PropTypes.string,
+
     onCancel: PropTypes.func,
     onDone: PropTypes.func
   };
 
-  static defaultProps = {};
+  static defaultProps = {
+    format: 'm4a'
+  };
 
   static Record(props) {
+    if (props.format === undefined) props.format = VoiceRecorder.defaultProps.format
+
     RNVoiceRecorder.Record(
       props,
       (path) => {

@@ -37,18 +37,23 @@ RCT_EXPORT_METHOD(Record:(nonnull NSDictionary *)props onDone:(RCTResponseSender
     
     _onDoneEditing = onDone;
     _onCancelEditing = onCancel;
+
+    NSString *format = [props objectForKey: @"format"];
     
     _recorder = [[IQAudioRecorderViewController alloc] init];
     _recorder.delegate = self;
     _recorder.title = @"Recorder";
     _recorder.maximumRecordDuration = 10;
     _recorder.allowCropping = YES;
-    _recorder.audioFormat = IQAudioFormat_wav;
     
     //    controller.barStyle = UIBarStyleDefault;
     //    controller.normalTintColor = [UIColor magentaColor];
     //    controller.highlightedTintColor = [UIColor orangeColor];
 
+    if ([format isEqualToString: @"wav"]) {
+        _recorder.audioFormat = IQAudioFormat_wav;
+    }
+    
     [self presentBlurredAudioRecorderViewControllerAnimated:_recorder];
 }
 
