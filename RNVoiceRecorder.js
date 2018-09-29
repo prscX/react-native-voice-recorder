@@ -8,6 +8,7 @@ class VoiceRecorder extends PureComponent {
   static propTypes = {
     ...ViewPropTypes,
 
+    path: PropTypes.string,
     format: PropTypes.string,
 
     onCancel: PropTypes.func,
@@ -33,6 +34,8 @@ class VoiceRecorder extends PureComponent {
   }
 
   static Play(props) {
+    if (props.format === undefined) props.format = VoiceRecorder.defaultProps.format;
+
     RNVoiceRecorder.Play(
       props,
       () => {

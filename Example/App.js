@@ -28,8 +28,22 @@ export default class App extends Component<Props> {
 
   _onRecord() {
     RNVoiceRecorder.Record({
+      format: 'wav',
       onDone: (path) => {
-        console.log('on done: ' + path)
+        console.log('record done: ' + path)
+
+        setTimeout(() => {
+          RNVoiceRecorder.Play({
+            path: path,
+            format: 'wav',
+            onDone: (play) => {
+              console.log('play done: ' + path)
+            },
+            onCancel: () => {
+              console.log('play cancelled')
+            }
+          });
+        }, 1000)
       },
       onCancel: () => {
         console.log('on cancel')

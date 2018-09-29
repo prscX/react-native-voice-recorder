@@ -13,6 +13,7 @@ RCT_EXPORT_MODULE()
 RCTResponseSenderBlock _onDoneEditing = nil;
 RCTResponseSenderBlock _onCancelEditing = nil;
 IQAudioRecorderViewController *_recorder;
+IQAudioCropperViewController *_player;
 
 -(void)audioRecorderController:(nonnull IQAudioRecorderViewController*)controller didFinishWithAudioAtPath:(nonnull NSString*)filePath {
     if (_onDoneEditing == nil) return;
@@ -57,6 +58,53 @@ RCT_EXPORT_METHOD(Record:(nonnull NSDictionary *)props onDone:(RCTResponseSender
     [self presentBlurredAudioRecorderViewControllerAnimated:_recorder];
 }
 
+
+RCT_EXPORT_METHOD(Play:(nonnull NSDictionary *)props onDone:(RCTResponseSenderBlock)onDone onCancel:(RCTResponseSenderBlock)onCancel) {
+    
+    _onDoneEditing = onDone;
+    _onCancelEditing = onCancel;
+    
+    NSString *path = [props objectForKey: @"path"];
+    NSString *format = [props objectForKey: @"format"];
+    
+    _player = [[IQAudioCropperViewController alloc] initWithFilePath:path];
+    _player.delegate = self;
+    _player.title = @"Recorder";
+    
+    //    controller.barStyle = UIBarStyleDefault;
+    //    controller.normalTintColor = [UIColor magentaColor];
+    //    controller.highlightedTintColor = [UIColor orangeColor];
+    
+    if ([format isEqualToString: @"wav"]) {
+        _recorder.audioFormat = IQAudioFormat_wav;
+    }
+    
+    [self presentBlurredAudioCropperViewControllerAnimated:_recorder];
+}
+
+
+- (void)presentBlurredAudioCropperViewControllerAnimated:(nonnull IQAudioCropperViewController *)audioCropperViewController
+{
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:audioCropperViewController];
+    
+    navigationController.toolbarHidden = NO;
+    navigationController.toolbar.translucent = YES;
+    [navigationController.toolbar setBackgroundImage:[UIImage new] forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    [navigationController.toolbar setShadowImage:[UIImage new] forToolbarPosition:UIBarPositionAny];
+    
+    navigationController.navigationBar.translucent = YES;
+    [navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [navigationController.navigationBar setShadowImage:[UIImage new]];
+    
+    navigationController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    navigationController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    audioCropperViewController.barStyle = audioCropperViewController.barStyle;        //This line is used to refresh UI of Audio Recorder View Controller
+
+
+    id<UIApplicationDelegate> app = [[UIApplication sharedApplication] delegate];
+    [((UINavigationController*) app.window.rootViewController) presentViewController:navigationController animated:YES completion:nil];
+}
 
 - (void)presentBlurredAudioRecorderViewControllerAnimated:(nonnull IQAudioRecorderViewController *)audioRecorderViewController
 {

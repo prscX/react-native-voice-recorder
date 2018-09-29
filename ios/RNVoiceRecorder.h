@@ -7,6 +7,7 @@
 #import <UIKit/UIKit.h>
 #import <IQAudioRecorderController/IQAudioRecorderViewController.h>
 #import <IQAudioRecorderController/IQAudioRecorderConstants.h>
+#import <IQAudioRecorderController/IQAudioCropperViewController.h>
 
 @interface RNVoiceRecorder : NSObject <RCTBridgeModule>
 
