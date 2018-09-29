@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 
 import { RNVoiceRecorder } from 'react-native-voice-recorder'
-
+let recordingPath;
 
 export default class App extends Component<Props> {
   constructor(props) {
@@ -32,18 +32,7 @@ export default class App extends Component<Props> {
       onDone: (path) => {
         console.log('record done: ' + path)
 
-        setTimeout(() => {
-          RNVoiceRecorder.Play({
-            path: path,
-            format: 'wav',
-            onDone: (play) => {
-              console.log('play done: ' + path)
-            },
-            onCancel: () => {
-              console.log('play cancelled')
-            }
-          });
-        }, 1000)
+        recordingPath = path;
       },
       onCancel: () => {
         console.log('on cancel')
@@ -53,6 +42,14 @@ export default class App extends Component<Props> {
 
   _onPlay() {
     RNVoiceRecorder.Play({
+      path: recordingPath,
+      format: "wav",
+      onDone: path => {
+        console.log("play done: " + path);
+      },
+      onCancel: () => {
+        console.log("play cancelled");
+      }
     });
   }
 
