@@ -2,11 +2,14 @@
 package px.voicerecorder;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -33,11 +36,12 @@ import cafe.adriel.androidaudiorecorder.model.AudioSource;
 
 public class RNVoiceRecorderModule extends ReactContextBaseJavaModule {
 
-  private final ReactApplicationContext reactContext;
+  private Callback _onDone;
+  private Callback _onCancel;
 
   public RNVoiceRecorderModule(ReactApplicationContext reactContext) {
     super(reactContext);
-    this.reactContext = reactContext;
+    getReactApplicationContext().addActivityEventListener(new ActivityEventListener());
   }
 
   @Override
@@ -48,6 +52,9 @@ public class RNVoiceRecorderModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void Record(final ReadableMap props, final Callback onDone, final Callback onCancel) {
+
+    _onDone = onDone;
+    _onCancel = onCancel;
 
     Dexter.withActivity(getCurrentActivity())
             .withPermissions(
@@ -79,6 +86,66 @@ public class RNVoiceRecorderModule extends ReactContextBaseJavaModule {
       }
       @Override public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
     }).check();
+  }
+
+
+  @ReactMethod
+  public void Play(final ReadableMap props, final Callback onDone, final Callback onCancel) {
+
+    _onDone = onDone;
+    _onCancel = onCancel;
+
+    Dexter.withActivity(getCurrentActivity())
+            .withPermissions(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.RECORD_AUDIO
+            ).withListener(new MultiplePermissionsListener() {
+      @Override public void onPermissionsChecked(MultiplePermissionsReport report) {/* ... */
+
+        String filePath = props.getString("path");
+
+        int color = Color.parseColor("#165297");
+
+        int requestCode = 0;
+        AndroidAudioRecorder.with(getCurrentActivity())
+                // Required
+                .setFilePath(filePath)
+                .setColor(color)
+                .setRequestCode(requestCode)
+
+                // Optional
+                .setSource(AudioSource.CAMCORDER.MIC)
+                .setChannel(AudioChannel.STEREO)
+                .setSampleRate(AudioSampleRate.HZ_48000)
+                .setAutoStart(true)
+                .setKeepDisplayOn(true)
+
+                // Start recording
+                .record();
+      }
+      @Override public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
+    }).check();
+  }
+
+
+
+  private class ActivityEventListener implements com.facebook.react.bridge.ActivityEventListener {
+
+    @Override
+    public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+
+      if (resultCode == AppCompatActivity.RESULT_OK) {
+        String filePath = Environment.getExternalStorageDirectory() + "/recorded_audio.wav";
+        _onDone.invoke(filePath);
+      } else if (resultCode == AppCompatActivity.RESULT_CANCELED) {
+        _onCancel.invoke();
+      }
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+
+    }
   }
 
 }
