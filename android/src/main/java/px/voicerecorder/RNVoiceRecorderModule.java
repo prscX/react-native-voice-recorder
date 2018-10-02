@@ -107,7 +107,7 @@ public class RNVoiceRecorderModule extends ReactContextBaseJavaModule {
         int color = Color.parseColor("#165297");
 
         int requestCode = 0;
-        AndroidAudioRecorder.with(getCurrentActivity())
+        AudioPlay.with(getCurrentActivity())
                 // Required
                 .setFilePath(filePath)
                 .setColor(color)
