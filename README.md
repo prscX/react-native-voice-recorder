@@ -85,6 +85,43 @@ allprojects {
 
   * Now build your iOS app through Xcode
 
+## 💻 Usage
+
+```javascript
+import { RNVoiceRecorder } from 'react-native-voice-recorder';
+
+RNVoiceRecorder.Record({
+    onDone: (path) => {
+
+    },
+    onCancel: () => {
+
+    }
+})
+
+RNVoiceRecorder.Play({
+    path: '',
+    onDone: (path) => {
+
+    },
+    onCancel: () => {
+
+    }
+})
+
+```
+
+
+## 💡 Props
+
+- **General(iOS & Android)**
+
+| Prop                   | Type                | Default | Note                                             |
+| ---------------------- | ------------------- | ------- | ------------------------------------------------ |
+| `path: mandatory`     | `string`            |         | Specify media path to play                 |
+| `onDone`    | `func` |         | Specify done callback            |
+| `onCancel`        | `func`            |      | Specify cancel callback       |
+
 
 ## ✨ Credits
 
