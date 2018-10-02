@@ -22,7 +22,7 @@ This library is a React Native bridge around native voice recorder libraries. It
 
 | **[hackiftekhar/IQAudioRecorderController](https://github.com/hackiftekhar/IQAudioRecorderController)**             |
 | ----------------- |
-| <img src="https://github.com/sagiwei/SGActionView/raw/master/sheet.png" width="437" />                  |
+| <img src="./assets/ios.gif" />                  |
 
 
 #### Android

@@ -11,8 +11,9 @@ import {
   StyleSheet,
   Text,
   View,
-  Button
-} from 'react-native';
+  Button,
+  ImageBackground
+} from "react-native";
 
 import { RNVoiceRecorder } from 'react-native-voice-recorder'
 let recordingPath;
@@ -54,7 +55,7 @@ export default class App extends Component<Props> {
   }
 
   render() {
-    return <View style={styles.container}>
+    return <ImageBackground source={require("./assets/background.jpg")} style={styles.backgroundImage}>
       <Button onPress={() => {
         this._onRecord()
 
@@ -67,15 +68,22 @@ export default class App extends Component<Props> {
         // this.setState({ visible: true });
       }} title={'Play'}>
       </Button>
-    </View>;
+    </ImageBackground>;
   }
 }
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    width: null,
+    height: null,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
+  },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    justifyContent: "center",
+    backgroundColor: "#F5FCFF"
   }
 });
