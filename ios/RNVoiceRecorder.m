@@ -10,34 +10,34 @@
 RCT_EXPORT_MODULE()
 
 
-RCTResponseSenderBlock _onDoneEditing = nil;
-RCTResponseSenderBlock _onCancelEditing = nil;
+RCTResponseSenderBlock _onDoneVoiceEditing = nil;
+RCTResponseSenderBlock _onCancelVoiceEditing = nil;
 IQAudioRecorderViewController *_recorder;
 IQAudioCropperViewController *_player;
 
 -(void)audioRecorderController:(nonnull IQAudioRecorderViewController*)controller didFinishWithAudioAtPath:(nonnull NSString*)filePath {
-    if (_onDoneEditing == nil) return;
+    if (_onDoneVoiceEditing == nil) return;
     
     // Save image.
     id<UIApplicationDelegate> app = [[UIApplication sharedApplication] delegate];
     [((UINavigationController*) app.window.rootViewController) dismissViewControllerAnimated:YES completion:nil];
 
-    _onDoneEditing(@[filePath]);
+    _onDoneVoiceEditing(@[filePath]);
 }
 
 -(void)audioRecorderControllerDidCancel:(nonnull IQAudioRecorderViewController*)controller {
-    if (_onCancelEditing == nil) return;
+    if (_onCancelVoiceEditing == nil) return;
     
     id<UIApplicationDelegate> app = [[UIApplication sharedApplication] delegate];
     [((UINavigationController*) app.window.rootViewController) dismissViewControllerAnimated:YES completion:nil];
 
-    _onCancelEditing(@[]);
+    _onCancelVoiceEditing(@[]);
 }
 
 RCT_EXPORT_METHOD(Record:(nonnull NSDictionary *)props onDone:(RCTResponseSenderBlock)onDone onCancel:(RCTResponseSenderBlock)onCancel) {
     
-    _onDoneEditing = onDone;
-    _onCancelEditing = onCancel;
+    _onDoneVoiceEditing = onDone;
+    _onCancelVoiceEditing = onCancel;
 
     NSString *format = [props objectForKey: @"format"];
     
@@ -61,8 +61,8 @@ RCT_EXPORT_METHOD(Record:(nonnull NSDictionary *)props onDone:(RCTResponseSender
 
 RCT_EXPORT_METHOD(Play:(nonnull NSDictionary *)props onDone:(RCTResponseSenderBlock)onDone onCancel:(RCTResponseSenderBlock)onCancel) {
     
-    _onDoneEditing = onDone;
-    _onCancelEditing = onCancel;
+    _onDoneVoiceEditing = onDone;
+    _onCancelVoiceEditing = onCancel;
     
     NSString *path = [props objectForKey: @"path"];
     NSString *format = [props objectForKey: @"format"];
