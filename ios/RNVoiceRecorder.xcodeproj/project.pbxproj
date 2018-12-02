@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7056D1D9D30F11FEFA031BF1 /* Pods_RNVoiceRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B40B8F9CFFD7A0A26926E2FC /* Pods_RNVoiceRecorder.framework */; };
+		819DAC0721B3DB8D00374E43 /* SCSiriWaveformView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA28DB5215DFA960049773E /* SCSiriWaveformView.framework */; };
 		B3E7B58A1CC2AC0600A0062D /* RNVoiceRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNVoiceRecorder.m */; };
 		CEA28DB6215DFA9A0049773E /* IQAudioRecorderController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA28DB1215DFA960049773E /* IQAudioRecorderController.framework */; };
 /* End PBXBuildFile section */
@@ -63,8 +63,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				819DAC0721B3DB8D00374E43 /* SCSiriWaveformView.framework in Frameworks */,
 				CEA28DB6215DFA9A0049773E /* IQAudioRecorderController.framework in Frameworks */,
-				7056D1D9D30F11FEFA031BF1 /* Pods_RNVoiceRecorder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

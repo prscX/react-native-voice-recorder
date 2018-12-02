@@ -1,6 +1,6 @@
 {
   "name": "react-native-voice-recorder",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "React Native: Native Voice Recorder",
   "main": "RNVoiceRecorder.js",
   "repository": {
@@ -19,7 +19,7 @@
     "pod-installer": "0.0.0"
   },
   "devDependencies": {
-    "prettier-pack": "0.0.7"
+    "prettier-pack": "0.0.8"
   },
   "license": "Apache License 2.0"
 }
