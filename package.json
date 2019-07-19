@@ -1,6 +1,6 @@
 {
   "name": "react-native-voice-recorder",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React Native: Native Voice Recorder",
   "main": "RNVoiceRecorder.js",
   "repository": {

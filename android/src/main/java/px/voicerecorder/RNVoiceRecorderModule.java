@@ -136,9 +136,18 @@ public class RNVoiceRecorderModule extends ReactContextBaseJavaModule {
 
       if (resultCode == AppCompatActivity.RESULT_OK) {
         String filePath = Environment.getExternalStorageDirectory() + "/recorded_audio.wav";
-        _onDone.invoke(filePath);
+        
+        if (_onDone != null) {
+          _onDone.invoke(filePath);
+        }
+
+        _onDone = null;
       } else if (resultCode == AppCompatActivity.RESULT_CANCELED) {
-        _onCancel.invoke();
+        if (_onCancel != null) {
+          _onCancel.invoke();
+        }
+
+        _onCancel = null;
       }
     }
 
