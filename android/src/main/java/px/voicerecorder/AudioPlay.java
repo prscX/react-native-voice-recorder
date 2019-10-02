@@ -3,7 +3,7 @@ package px.voicerecorder;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import cafe.adriel.androidaudiorecorder.AndroidAudioRecorder;
 import cafe.adriel.androidaudiorecorder.AudioRecorderActivity;
