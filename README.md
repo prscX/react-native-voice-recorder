@@ -34,7 +34,43 @@ This library is a React Native bridge around native voice recorder libraries. It
 
 ## 📖 Getting started
 
-`$ npm install react-native-voice-recorder --save`
+`$ yarn add react-native-voice-recorder`
+
+## **RN60 >= RNVR V1 >**
+
+> RN60 above please use `react-native-voice-recorder` V1 and above
+
+- **iOS**
+
+> **iOS Prerequisite:** Please make sure `CocoaPods` is installed on your system
+
+	- Add the following to your `Podfile` -> `ios/Podfile` and run pod update:
+
+
+```
+  pod 'IQAudioRecorderController', :git => 'https://github.com/prscX/IQAudioRecorderController', :branch => 'wav'
+
+  use_native_modules!
+
+  pod 'RNVoiceRecorder', :path => '../node_modules/react-native-voice-recorder/ios'
+```
+
+- **Android**
+
+  * Please add below user permission to your app `AndroidManifest`:
+
+```
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+```
+
+
+## **RN60 < RNVR V1 <**
+
+> RN60 below please use `react-native-voice-recorder` V.0.*
+
 
 `$ react-native link react-native-voice-recorder`
 
