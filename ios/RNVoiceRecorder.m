@@ -44,7 +44,7 @@ RCT_EXPORT_METHOD(Record:(nonnull NSDictionary *)props onDone:(RCTResponseSender
     _recorder = [[IQAudioRecorderViewController alloc] init];
     _recorder.delegate = self;
     _recorder.title = @"Recorder";
-    _recorder.maximumRecordDuration = 10;
+    // _recorder.maximumRecordDuration = 10;
     _recorder.allowCropping = YES;
     
     //    controller.barStyle = UIBarStyleDefault;
