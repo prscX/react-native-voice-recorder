@@ -13,6 +13,8 @@
 
     ReactNative: Native Voice Recorder (Android/iOS)
 
+Due to time constraint, this library is deprecated and not maintained anymore, You can still use this library.
+
 If this project has helped you out, please support us with a star 🌟
 </h1>
 This library is a React Native bridge around native voice recorder libraries. It allows you to record and play voice.
